@@ -1,0 +1,56 @@
+<div class="container-fluid h-100">
+    <div class="order-list h-100 d-flex flex-column">
+        <h2>Lista de Pedidos</h2>
+
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Dados do Cartão</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders; let i = index">
+                    <th scope="row">{{ order.id }}</th> <!-- Exibe o índice + 1 como ID -->
+                    <td>{{ order.description }}</td>
+                    <td>{{order.amount | currency: 'BRL': 'symbol'}}</td>
+                    <td>
+                        <ng-container *ngIf="order.creditCard; else noCard">
+                            {{ maskAndFormatCardNumber(order.creditCard.cardNumber) }}
+                        </ng-container>
+                        <ng-template #noCard>
+                            <span>Nenhum dado do cartão</span>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <span class="badge text-white" [ngClass]="{
+                            'text-bg-success': order.status === 'payment-approved', 
+                            'text-bg-primary': order.status === 'payment-not-approved', 
+                            'text-bg-danger': order.status === 'cancel',
+                            'text-bg-warning': order.status === 'payment-pendent'
+                        }">
+                            {{
+                            order.status === 'payment-approved' ? 'Aprovado' :
+                            order.status === 'payment-not-approved' ? 'Rejeitado' :
+                            order.status === 'cancel' ? 'Cancelado' :
+                            'Pendente'
+                            }} <!-- Lógica de status -->
+                        </span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="cancelOrder(order.id)">Cancelar</button>
+                        <!-- Chama a função de cancelamento -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div *ngIf="orders.length === 0" class="mt-auto">
+            <p>Nenhum pedido registrado.</p> <!-- Mensagem se não houver pedidos -->
+        </div>
+    </div>
+</div>
