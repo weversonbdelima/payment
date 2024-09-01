@@ -1,0 +1,76 @@
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <div>
+            <label for="description">Descrição:</label>
+            <input class="form-control" id="description" formControlName="description" />
+            <div *ngIf="orderForm.get('description')?.invalid && orderForm.get('description')?.touched">
+                Descrição é obrigatória.
+            </div>
+        </div>
+
+        <div>
+            <label for="amount">Valor:</label>
+
+            <input class="form-control" id="amount" type="text" formControlName="amount" mask="separator.2" prefix="R$ "
+                thousandSeparator="." decimalMarker="," />
+            <div *ngIf="orderForm.get('amount')?.invalid && orderForm.get('amount')?.touched">
+                Valor deve ser maior que zero.
+            </div>
+        </div>
+
+ 
+        <div formGroupName="creditCard">
+            <div>
+                <label for="cardNumber">Número do Cartão:</label>
+                <input id="cardNumber" class="form-control" formControlName="cardNumber" mask="0000 0000 0000 0000" />
+                <div
+                    *ngIf="orderForm.get('creditCard.cardNumber')?.invalid && orderForm.get('creditCard.cardNumber')?.touched">
+                    O número do cartão é obrigatório.
+                </div>
+            </div>
+
+            <div>
+                <label for="holder">Nome do Titular:</label>
+                <input id="holder" class="form-control" formControlName="holder" />
+                <div *ngIf="orderForm.get('creditCard.holder')?.invalid && orderForm.get('creditCard.holder')?.touched">
+                    O nome do titular é obrigatório.
+                </div>
+            </div>
+
+            <div>
+                <label for="expirationDate">Data de Validade:</label>
+                <input id="expirationDate" class="form-control" formControlName="expirationDate" placeholder="MM/AAAA"
+                    mask="00/0000" />
+                <div
+                    *ngIf="orderForm.get('creditCard.expirationDate')?.invalid && orderForm.get('creditCard.expirationDate')?.touched">
+                    A data de validade é obrigatória.
+                </div>
+            </div>
+
+            <div>
+                <label for="securityCode">Código de Segurança:</label>
+                <input id="securityCode" class="form-control" type="text" formControlName="securityCode" />
+                <div
+                    *ngIf="orderForm.get('creditCard.securityCode')?.invalid && orderForm.get('creditCard.securityCode')?.touched">
+                    O código de segurança é obrigatório.
+                </div>
+            </div>
+
+            <div>
+                <label for="brand">Bandeira do Cartão:</label>
+                <input id="brand" class="form-control" formControlName="brand" />
+                <div *ngIf="orderForm.get('creditCard.brand')?.invalid && orderForm.get('creditCard.brand')?.touched">
+                    A bandeira do cartão é obrigatória.
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div *ngIf="isLoading; else submitButton">
+        Carregando... 
+    </div>
+
+    <ng-template #submitButton>
+        <button type="submit" [disabled]="isLoading || orderForm.invalid">Registrar Pedido</button>
+    </ng-template>
+</form>
