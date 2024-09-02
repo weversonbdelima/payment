@@ -39,21 +39,11 @@ public class OrderController {
 
         try {
 
-            // TODO: Descriptografar dados do cartão.
             order.setCreditCard(CryptoUtils.decryptCard(order.getCreditCard(), secretKey));
-
-            logger.info("Decrypt {} ", order.getCreditCard().getSecurityCode());
 
             order.setStatus("payment-pendent");
 
-            Order newOrder = new Order();
-
-            newOrder.setAmount(order.getAmount());
-            newOrder.setDescription(order.getDescription());
-            newOrder.setStatus(order.getStatus());
-            newOrder.setCreditCard(order.getCreditCard());
-
-            order = orderService.createOrder(newOrder);
+            order = orderService.createOrder(order);
 
             CreditCard creditCard = new CreditCard();
             creditCard.setCardNumber(order.getCreditCard().getCardNumber());
@@ -85,10 +75,6 @@ public class OrderController {
                 order.setStatus("payment-not-approved");
             }
 
-            logger.error("ORDER ID {}", order.getId());
-
-            order = orderService.save(order);
-
             return ResponseEntity.ok(order);
         } catch (Exception e) {
             logger.error("Failed to create order: ", e);
@@ -111,12 +97,12 @@ public class OrderController {
                 return ResponseEntity.badRequest().body(errorResponse);
             }
 
-            boolean isCanceled = cieloService.cancel(order);
+            Order orderCanceled = orderService.cancelOrder(order);
+
+            boolean isCanceled = cieloService.cancel(orderCanceled);
 
             if (isCanceled) {
-                Order orderCanceled = orderService.cancelOrder(order);
                 return ResponseEntity.ok(orderCanceled);
-
             } else {
 
                 Map<String, String> errorResponse = new HashMap<>();
