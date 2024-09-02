@@ -1,7 +1,6 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.CreditCard;
-
 import com.example.backend.model.Order;
 import com.example.backend.model.Payment;
 import com.example.backend.model.PaymentRequest;
@@ -25,7 +24,8 @@ import java.util.Map;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CieloService.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class); // Corrigido para
+                                                                                         // OrderController
     @Autowired
     private OrderService orderService;
     @Autowired
@@ -36,13 +36,14 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<Object> createOrder(@RequestBody Order order) {
+        logger.info("Starting order creation process...");
 
         try {
-
+            logger.info("Decrypting credit card information...");
             order.setCreditCard(CryptoUtils.decryptCard(order.getCreditCard(), secretKey));
-
             order.setStatus("payment-pendent");
 
+            logger.info("Saving order...");
             order = orderService.createOrderOrSave(order);
 
             CreditCard creditCard = new CreditCard();
@@ -67,12 +68,14 @@ public class OrderController {
             paymentRequest.setPayment(payment);
             paymentRequest.setMerchantOrderId(order.getId().toString());
 
-            boolean isAprovvedPayment = cieloService.processPayment(paymentRequest);
+            logger.info("Processing payment...");
+            boolean isApprovedPayment = cieloService.processPayment(paymentRequest);
+            order.setStatus(isApprovedPayment ? "payment-approved" : "payment-not-approved");
 
-            order.setStatus(isAprovvedPayment ? "payment-approved" : "payment-not-approved");
-
+            logger.info("Updating order status to: {}", order.getStatus());
             order = orderService.createOrderOrSave(order);
 
+            logger.info("Order created successfully with ID: {}", order.getId());
             return ResponseEntity.ok(order);
         } catch (Exception e) {
             logger.error("Failed to create order: ", e);
@@ -84,24 +87,28 @@ public class OrderController {
 
     @PostMapping("/cancel/{id}")
     public ResponseEntity<Object> cancelOrder(@PathVariable Long id) {
-        try {
-            logger.info("Cancel order with ID: {}", id);
+        logger.info("Cancel order with ID: {}", id);
 
+        try {
             Order order = orderService.getOrder(id);
+            logger.info("Retrieved order with ID: {}", id);
 
             if ("canceled".equals(order.getStatus())) {
+                logger.warn("Order with ID {} is already canceled.", id);
                 Map<String, String> errorResponse = new HashMap<>();
                 errorResponse.put("message", "Erro ao tentar cancelar o pedido. O pedido já está cancelado.");
                 return ResponseEntity.badRequest().body(errorResponse);
             }
 
+            logger.info("Attempting to cancel order with ID: {}", id);
             boolean isCanceled = cieloService.cancel(order);
 
             if (isCanceled) {
+                logger.info("Order with ID: {} canceled successfully.", id);
                 Order orderCanceled = orderService.cancelOrder(order);
                 return ResponseEntity.ok(orderCanceled);
             } else {
-
+                logger.error("Failed to cancel order with ID: {}", id);
                 Map<String, String> errorResponse = new HashMap<>();
                 errorResponse.put("message", "Erro ao tentar cancelar pedido.");
                 return ResponseEntity.badRequest().body(errorResponse);
@@ -117,8 +124,8 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<Object> getAllOrders() {
+        logger.info("Retrieving all orders");
         try {
-            logger.info("Get all orders");
             return ResponseEntity.ok(orderService.getAllOrders());
         } catch (Exception e) {
             logger.error("Failed to get all orders: ", e);
