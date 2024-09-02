@@ -115,16 +115,13 @@ Após a instalação e execução do banco de dados, backend e frontend, siga os
      - Dados do cartão de crédito (número, validade, CVV).
    - Clique no botão para registrar a venda.
 
-3. **Visualizar o Status da Transação**:
-   - Após o registro, a aplicação exibirá o status da transação (sucesso ou falha) na tela.
-
-4. **Listar Vendas Realizadas**:
+3. **Listar Vendas Realizadas**:
    - Acesse a seção de listagem de vendas para visualizar todas as vendas registradas.
 
-5. **Cancelar uma Venda (se aplicável)**:
+4. **Cancelar uma Venda **:
    - Caso a venda registrada permita o cancelamento, você poderá clicar na opção correspondente para cancelar a venda e o pagamento junto à Cielo.
 
-6. **Monitorar Erros**:
+5. **Monitorar Erros**:
    - Em caso de erros, verifique as mensagens exibidas na interface e os logs no terminal onde o backend está em execução para identificar e resolver os problemas.
 
 Após seguir esses passos, você poderá registrar e gerenciar vendas fictícias utilizando a aplicação.
