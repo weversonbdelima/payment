@@ -6,6 +6,8 @@ import { Order } from '../models/order.model'; // Importa o modelo Order
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { Router } from '@angular/router';
+import { CryptoUtils } from '../../utils/crypto.util';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-order-register',
@@ -20,7 +22,7 @@ export class OrderRegisterComponent {
 
 
 
-  constructor(private fb: FormBuilder, private orderService: OrderService, private router: Router) { // Injetar OrderService
+  constructor(private fb: FormBuilder, private orderService: OrderService, private router: Router, private cryptoUtils: CryptoUtils) { // Injetar OrderService
     this.orderForm = this.fb.group({
       description: ['', Validators.required],
       amount: ['', [Validators.required, Validators.min(0)]],
@@ -34,22 +36,38 @@ export class OrderRegisterComponent {
     });
   }
 
-
+  onCancel(): void {
+    this.router.navigate(['/']);
+  }
 
   async onSubmit() {
 
 
     if (this.orderForm.valid) {
-      const order: Order = this.orderForm.value;
-
       try {
+        let order = {
+
+          "description": this.orderForm.value.description,
+          "amount": this.orderForm.value.amount,
+          "status": "pendent",
+          "creditCard": {
+            "cardNumber": this.cryptoUtils.encrypt(this.orderForm.value.creditCard.cardNumber, environment.secretKey),
+            "holder": this.cryptoUtils.encrypt(this.orderForm.value.creditCard.holder, environment.secretKey),
+            "expirationDate": this.cryptoUtils.encrypt(this.orderForm.value.creditCard.expirationDate, environment.secretKey),
+            "securityCode": this.cryptoUtils.encrypt(this.orderForm.value.creditCard.securityCode, environment.secretKey),
+            "brand": this.cryptoUtils.encrypt(this.orderForm.value.creditCard.brand, environment.secretKey)
+          }
+
+        }
+
+
         this.isLoading = true;
-        const order = await this.orderService.registerOrder(this.order);
+        const orderResponse = await this.orderService.registerOrder(order);
 
 
 
-        console.log(order);
-        if (order.id != null) {
+        console.log(orderResponse);
+        if (orderResponse.id != null) {
 
           this.router.navigate(['/orders']);
         }
