@@ -97,11 +97,10 @@ public class OrderController {
                 return ResponseEntity.badRequest().body(errorResponse);
             }
 
-            Order orderCanceled = orderService.cancelOrder(order);
-
-            boolean isCanceled = cieloService.cancel(orderCanceled);
+            boolean isCanceled = cieloService.cancel(order);
 
             if (isCanceled) {
+                Order orderCanceled = orderService.cancelOrder(order);
                 return ResponseEntity.ok(orderCanceled);
             } else {
 
