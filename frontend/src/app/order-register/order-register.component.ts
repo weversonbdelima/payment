@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { OrderService } from '../services/order.service'; // Importa o OrderService
-import { Order } from '../models/order.model'; // Importa o modelo Order
+import { OrderService } from '../services/order.service';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { Router } from '@angular/router';

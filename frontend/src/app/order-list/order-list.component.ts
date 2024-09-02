@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderService } from '../services/order.service'; // Ajuste o caminho conforme necessário
-import { Order } from '../models/order.model'; // Ajuste o caminho conforme necessário
+import { OrderService } from '../services/order.service'; 
+import { Order } from '../models/order.model';
 
 
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule,], // Adiciona o HttpClientModule aqui
+  imports: [CommonModule,], 
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss']
 })
@@ -22,10 +22,7 @@ export class OrderListComponent implements OnInit {
   }
 
   async fetchOrders() {
-    console.log('Carregando pedidos...');
     this.orders = await this.orderService.getOrders();
-
-
   }
 
   async cancelOrder(id: number) {
