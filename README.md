@@ -2,7 +2,7 @@
 
 ![Badge de status do projeto](https://img.shields.io/badge/status-em%20desenvolvimento-yellow) ![Badge de licença](https://img.shields.io/badge/license-MIT-blue)
 
-**Descrição curta**: 
+**Descrição**: 
 
 Esta aplicação foi desenvolvida para permitir o registro de compras fictícias e a realização do processo de pagamento utilizando a API de Sandbox da Cielo. O projeto inclui a implementação tanto do front-end quanto do back-end, garantindo uma comunicação eficiente e segura entre as duas camadas, bem como uma integração robusta com a API da Cielo.
 
@@ -42,8 +42,21 @@ Este projeto foi concebido como uma solução completa para simular o processo d
 
 ## **Instalação**
 
-Passos para rodar o projeto localmente:
+Siga os passos abaixo para configurar o ambiente e rodar a aplicação localmente:
 
-1. Clone o repositório:
+1. Clone o repositório do projeto:
     ```bash
-    git clone https
+    git clone https://github.com/weversonbdelima/payment.git
+    ```
+
+2. Entre no diretório do projeto:
+    ```bash
+    cd payment
+    ```
+
+3. Inicie o banco de dados utilizando o Docker Compose:
+    ```bash
+    sudo docker-compose up
+    ```
+
+Após seguir esses passos, o banco de dados estará configurado e pronto para uso. Em seguida, você poderá proceder com a instalação e execução do front-end e back-end da aplicação.
