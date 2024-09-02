@@ -24,8 +24,8 @@ import java.util.Map;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderController.class); // Corrigido para
-                                                                                         // OrderController
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+                                                                                         
     @Autowired
     private OrderService orderService;
     @Autowired
