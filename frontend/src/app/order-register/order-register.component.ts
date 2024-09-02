@@ -65,8 +65,6 @@ export class OrderRegisterComponent {
         const orderResponse = await this.orderService.registerOrder(order);
 
 
-
-        console.log(orderResponse);
         if (orderResponse.id != null) {
 
           this.router.navigate(['/orders']);
