@@ -13,7 +13,7 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public Order createOrder(Order order) {
+    public Order createOrderOrSave(Order order) {
 
         return orderRepository.save(order);
     }

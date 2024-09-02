@@ -43,7 +43,7 @@ public class OrderController {
 
             order.setStatus("payment-pendent");
 
-            order = orderService.createOrder(order);
+            order = orderService.createOrderOrSave(order);
 
             CreditCard creditCard = new CreditCard();
             creditCard.setCardNumber(order.getCreditCard().getCardNumber());
@@ -69,11 +69,9 @@ public class OrderController {
 
             boolean isAprovvedPayment = cieloService.processPayment(paymentRequest);
 
-            if (isAprovvedPayment) {
-                order.setStatus("payment-approved");
-            } else {
-                order.setStatus("payment-not-approved");
-            }
+            order.setStatus(isAprovvedPayment ? "payment-approved" : "payment-not-approved");
+
+            order = orderService.createOrderOrSave(order);
 
             return ResponseEntity.ok(order);
         } catch (Exception e) {
