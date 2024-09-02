@@ -15,7 +15,6 @@ O front-end foi criado para oferecer uma interface amigável e intuitiva, onde o
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Como Usar](#como-usar)
-- [Contribuição](#contribuição)
 - [Licença](#licença)
 - [Contato](#contato)
 
@@ -125,3 +124,24 @@ Após a instalação e execução do banco de dados, backend e frontend, siga os
    - Em caso de erros, verifique as mensagens exibidas na interface e os logs no terminal onde o backend está em execução para identificar e resolver os problemas.
 
 Após seguir esses passos, você poderá registrar e gerenciar vendas fictícias utilizando a aplicação.
+
+## **Licença**
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+### Resumo da Licença MIT
+
+A Licença MIT é uma licença permissiva que permite que qualquer pessoa faça quase qualquer coisa com o projeto, incluindo uso, cópia, modificação, fusão, publicação, distribuição, sublicenciamento e/ou venda de cópias do software, desde que o aviso de copyright e a declaração de licença sejam incluídos em todas as cópias ou partes substanciais do software.
+
+Para mais informações, consulte o [site oficial da Open Source Initiative](https://opensource.org/licenses/MIT).
+
+## **Contato**
+
+Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
+
+- **Email**: [weversonbdelima@gmail.com](mailto:weversonbdelima@gmail.com)
+- **GitHub**: [github.com.br/weversonbdelima](https://github.com/br/weversonbdelima)
+- **LinkedIn**: [linkedin.com/in/weversonblima](https://www.linkedin.com/in/weversonblima)
+
+Estou sempre aberto a feedbacks e colaborações!
+
