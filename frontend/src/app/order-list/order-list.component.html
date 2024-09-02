@@ -1,14 +1,15 @@
 <div class="container-fluid h-100">
     <div class="order-list h-100 d-flex flex-column">
-        <h2>Lista de Pedidos</h2>
+        <h2 class="my-4">Pedidos</h2>
 
-        <table class="table table-responsive">
+        <table class="table table-responsive ">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Valor</th>
                     <th scope="col">Dados do Cartão</th>
+                    <th scope="col">Marca</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -27,23 +28,31 @@
                         </ng-template>
                     </td>
                     <td>
+                        <img src="{{getCardTypePath(order.creditCard!.cardNumber)}}" width="32px" />
+
+
+
+                    </td>
+                    <td>
                         <span class="badge text-white" [ngClass]="{
                             'text-bg-success': order.status === 'payment-approved', 
                             'text-bg-primary': order.status === 'payment-not-approved', 
-                            'text-bg-danger': order.status === 'cancel',
+                            'text-bg-danger': order.status === 'canceled',
                             'text-bg-warning': order.status === 'payment-pendent'
                         }">
                             {{
                             order.status === 'payment-approved' ? 'Aprovado' :
                             order.status === 'payment-not-approved' ? 'Rejeitado' :
-                            order.status === 'cancel' ? 'Cancelado' :
+                            order.status === 'canceled' ? 'Cancelado' :
                             'Pendente'
-                            }} <!-- Lógica de status -->
+                            }}
                         </span>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" (click)="cancelOrder(order.id)">Cancelar</button>
-                        <!-- Chama a função de cancelamento -->
+
+                        <button type="button" class="btn btn-danger" [disabled]="order.status === 'canceled'"
+                            (click)="cancelOrder(order)">Cancelar</button>
+
                     </td>
                 </tr>
             </tbody>

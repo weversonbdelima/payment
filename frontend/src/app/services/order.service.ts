@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CustomHttpClient } from './custom-http-client.service';
 
 import { environment } from '../../environments/environment';
+import { Order } from '../models/order.model';
 
 
 @Injectable({
@@ -19,5 +20,10 @@ export class OrderService {
 
   async getOrders() {
     return await this.customHttpClient.get(this.apiUrl);
+  }
+  async cancelOrder(order: Order) {
+    const endpoint = `${this.apiUrl}/cancel/${order.id}`;
+
+    return await this.customHttpClient.post(endpoint);
   }
 }

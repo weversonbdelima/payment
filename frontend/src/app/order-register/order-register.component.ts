@@ -6,6 +6,10 @@ import { Order } from '../models/order.model'; // Importa o modelo Order
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
+import { environment } from '../../environments/environment';
+import { CryptoService } from '../services/crypto.service';
+import { CreditCard } from '../models/creditCard.model';
 
 @Component({
   selector: 'app-order-register',
@@ -18,21 +22,7 @@ export class OrderRegisterComponent implements OnInit {
   orderForm: FormGroup;
   isLoading: boolean = false;
 
-
-
-  order = {
-    description: 'Order Example',
-    amount: 100.0,
-    creditCard: {
-      cardNumber: '1234123412341234',
-      holder: 'Cardholder Name',
-      expirationDate: '12/2030',
-      securityCode: '123',
-      brand: 'Visa'
-    }
-  };
-
-  constructor(private fb: FormBuilder, private orderService: OrderService, private router: Router) { // Injetar OrderService
+  constructor(private fb: FormBuilder, private orderService: OrderService, private router: Router, private cryptoService: CryptoService) {
     this.orderForm = this.fb.group({
       description: ['', Validators.required],
       amount: ['', [Validators.required, Validators.min(0)]],
@@ -41,37 +31,64 @@ export class OrderRegisterComponent implements OnInit {
         holder: ['', Validators.required],
         expirationDate: ['', Validators.required],
         securityCode: ['', Validators.required],
-        brand: ['', Validators.required]
+        brand: ['', Validators.required] // Adiciona o controle para a marca do cartão
       })
     });
   }
-  ngOnInit() {
 
+  ngOnInit() { }
 
-
+  encryptData(data: string, secretKey: string): string {
+    console.log(secretKey);
+    const encryptedData = CryptoJS.AES.encrypt(data, secretKey).toString();
+    return encryptedData;
   }
 
+  encryptCard(card: CreditCard) {
+    const encryptedCard = new CreditCard(
+      this.cryptoService.encrypt(card.cardNumber, environment.secretKey),
+      this.cryptoService.encrypt(card.holder, environment.secretKey),
+      this.cryptoService.encrypt(card.expirationDate, environment.secretKey),
+      this.cryptoService.encrypt(card.securityCode, environment.secretKey),
+      this.cryptoService.encrypt(card.brand, environment.secretKey) // Adiciona a marca do cartão
+    );
+
+    return encryptedCard;
+  }
+
+  onCancel(): void {
+    this.router.navigate(['/']);
+  }
 
   async onSubmit() {
-
-
     if (this.orderForm.valid) {
-      const order: Order = this.orderForm.value; 
+      let order: Order = new Order();
+
+      order.description = this.orderForm.value.description;
+      order.amount = this.orderForm.value.amount;
+      order.status = 'pendent'; // ou outro status padrão
+
+      order.creditCard = {
+        securityCode: this.orderForm.value.creditCard.securityCode,
+        cardNumber: this.orderForm.value.creditCard.cardNumber,
+        holder: this.orderForm.value.creditCard.holder,
+        expirationDate: this.orderForm.value.creditCard.expirationDate,
+        brand: this.orderForm.value.creditCard.brand // Adiciona a marca do cartão
+      };
+
+      order.creditCard = this.encryptCard(order.creditCard);
 
       try {
         this.isLoading = true;
-        const order = await this.orderService.registerOrder(this.order);
 
-       
+        const orderResponse = await this.orderService.registerOrder(order);
 
         console.log(order);
-        if (order.id != null) {
-
+        if (orderResponse.id != null) {
           this.router.navigate(['/orders']);
         }
-
       } catch (error) {
-
+        console.error('Erro ao registrar o pedido:', error);
       } finally {
         this.isLoading = false;
       }

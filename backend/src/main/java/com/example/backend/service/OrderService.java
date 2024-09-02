@@ -36,4 +36,9 @@ public class OrderService {
         orderCanceled.setStatus("canceled");
         return orderRepository.save(order);
     }
+
+    public Order save(Order order) {
+
+        return orderRepository.save(order);
+    }
 }

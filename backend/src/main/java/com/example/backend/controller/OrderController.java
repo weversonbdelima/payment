@@ -7,7 +7,10 @@ import com.example.backend.model.Payment;
 import com.example.backend.model.PaymentRequest;
 import com.example.backend.service.CieloService;
 import com.example.backend.service.OrderService;
+import com.example.backend.utils.CryptoUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,13 +31,29 @@ public class OrderController {
     @Autowired
     private CieloService cieloService;
 
+    @Value("${encryption.secretKey}")
+    private String secretKey;
+
     @PostMapping
     public ResponseEntity<Object> createOrder(@RequestBody Order order) {
 
         try {
+
+            // TODO: Descriptografar dados do cartão.
+            order.setCreditCard(CryptoUtils.decryptCard(order.getCreditCard(), secretKey));
+
+            logger.info("Decrypt {} ", order.getCreditCard().getSecurityCode());
+
             order.setStatus("payment-pendent");
 
-            order = orderService.createOrder(order);
+            Order newOrder = new Order();
+
+            newOrder.setAmount(order.getAmount());
+            newOrder.setDescription(order.getDescription());
+            newOrder.setStatus(order.getStatus());
+            newOrder.setCreditCard(order.getCreditCard());
+
+            order = orderService.createOrder(newOrder);
 
             CreditCard creditCard = new CreditCard();
             creditCard.setCardNumber(order.getCreditCard().getCardNumber());
@@ -66,6 +85,10 @@ public class OrderController {
                 order.setStatus("payment-not-approved");
             }
 
+            logger.error("ORDER ID {}", order.getId());
+
+            order = orderService.save(order);
+
             return ResponseEntity.ok(order);
         } catch (Exception e) {
             logger.error("Failed to create order: ", e);
@@ -75,7 +98,7 @@ public class OrderController {
         }
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/cancel/{id}")
     public ResponseEntity<Object> cancelOrder(@PathVariable Long id) {
         try {
             logger.info("Cancel order with ID: {}", id);
@@ -88,12 +111,12 @@ public class OrderController {
                 return ResponseEntity.badRequest().body(errorResponse);
             }
 
-            Order orderCanceled = orderService.cancelOrder(order);
-
-            boolean isCanceled = cieloService.cancel(orderCanceled);
+            boolean isCanceled = cieloService.cancel(order);
 
             if (isCanceled) {
+                Order orderCanceled = orderService.cancelOrder(order);
                 return ResponseEntity.ok(orderCanceled);
+
             } else {
 
                 Map<String, String> errorResponse = new HashMap<>();
