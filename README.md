@@ -44,6 +44,8 @@ Este projeto foi concebido como uma solução completa para simular o processo d
 
 Siga os passos abaixo para configurar o ambiente e rodar a aplicação localmente:
 
+### 1. Banco de Dados
+
 1. Clone o repositório do projeto:
     ```bash
     git clone https://github.com/weversonbdelima/payment.git
@@ -58,6 +60,8 @@ Siga os passos abaixo para configurar o ambiente e rodar a aplicação localment
     ```bash
     docker-compose up
     ```
+
+### 2. Backend
 
 4. Entre na pasta do backend:
     ```bash
@@ -74,14 +78,22 @@ Siga os passos abaixo para configurar o ambiente e rodar a aplicação localment
     mvn spring-boot:run
     ```
 
+### 3. Frontend
+
 7. Para rodar o frontend, abra um novo terminal, entre na pasta do frontend:
     ```bash
     cd frontend
     ```
 
-8. Execute o seguinte comando para iniciar o servidor do frontend:
+8. Instale as dependências do frontend:
     ```bash
-    npm start
+    npm install
+    ```
+
+9. Execute o servidor do frontend utilizando o Angular CLI:
+    ```bash
+    ng serve
     ```
 
 Após seguir esses passos, tanto o backend quanto o frontend estarão em execução, e você poderá acessar a aplicação no navegador.
+
