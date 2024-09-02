@@ -62,4 +62,28 @@ export class OrderListComponent implements OnInit {
 
     return formatted;
   }
+
+  getCardTypePath(cardNumber: string): string {
+    const path = "assets/images/card_brand/";
+    const cleanedNumber = cardNumber.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+
+    // Verifique se o número do cartão tem comprimento válido
+    if (cleanedNumber.length < 13 || cleanedNumber.length > 19) {
+      return path + 'credit-card.png'; // Retorna imagem padrão se o comprimento for inválido
+    }
+
+    if (cleanedNumber.startsWith('4')) {
+      return path + 'visa.svg';
+    } else if (/^5[1-5]/.test(cleanedNumber)) {
+      return path + 'mastercard.svg';
+    } else if (/^3[47]/.test(cleanedNumber)) {
+      return path + 'american-express.svg';
+    } else if (/^3(6|8|9)/.test(cleanedNumber)) {
+      return path + 'diners-club-international.svg';
+    } else if (/^(6011|65|64[4-9]|622(12[6-9]|1[3-9]\d|[2-8]\d{2}|9[01]\d|92[0-5]))/.test(cleanedNumber)) {
+      return path + 'discover-card.svg';
+    } else {
+      return path + 'credit-card.png'; // Imagem padrão para cartões não identificados
+    }
+  }
 }

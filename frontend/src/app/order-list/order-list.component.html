@@ -9,6 +9,7 @@
                     <th scope="col">Descrição</th>
                     <th scope="col">Valor</th>
                     <th scope="col">Dados do Cartão</th>
+                    <th scope="col">Bandeira</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -26,6 +27,7 @@
                             <span>Nenhum dado do cartão</span>
                         </ng-template>
                     </td>
+                    <td><img src="{{getCardTypePath(order.creditCard.cardNumber)}}" width="32px" /></td>
                     <td>
                         <span class="badge text-white" [ngClass]="{
                             'text-bg-success': order.status === 'payment-approved', 
