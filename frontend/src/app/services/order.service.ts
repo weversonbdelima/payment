@@ -20,4 +20,12 @@ export class OrderService {
   async getOrders() {
     return await this.customHttpClient.get(this.apiUrl);
   }
+
+  async cancelOrder(id: number) {
+
+    const endpoint = `${this.apiUrl}/cancel/${id}`;
+
+    console.log(endpoint);
+    return await this.customHttpClient.post(endpoint);
+  }
 }
