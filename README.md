@@ -1,4 +1,4 @@
-![Logo do Projeto](assets/imagens/transactx.png)
+![Logo do Projeto](assets/images/transactx.png)
 
 
 
