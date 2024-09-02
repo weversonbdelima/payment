@@ -30,12 +30,12 @@ Este projeto foi concebido como uma solução completa para simular o processo d
 - **Exibição do Status da Transação**: Mostra o status da transação (sucesso ou falha) após o processamento do pagamento.
 - **Tratamento de Erros e Validações**: Implementação de validações nos formulários do front-end e tratamento adequado de erros para garantir a consistência e segurança dos dados inseridos.
 - **Listagem de Vendas**: Exibe uma lista completa de todas as vendas realizadas, permitindo ao usuário visualizar o histórico de transações.
-- **Cancelamento de Vendas (*Diferencial*)**: Funcionalidade adicional que permite o cancelamento de uma venda e do pagamento correspondente junto à Cielo.
-- **Criptografia de Dados Sensíveis (*Diferencial*)**: Implementação de criptografia para proteger os dados sensíveis, como informações do cartão de crédito, garantindo a segurança durante o processamento.
+- **Cancelamento de Vendas**: Funcionalidade adicional que permite o cancelamento de uma venda e do pagamento correspondente junto à Cielo.
+- **Criptografia de Dados Sensíveis**: Implementação de criptografia para proteger os dados sensíveis, como informações do cartão de crédito, garantindo a segurança durante o processamento.
 
 ## **Tecnologias Utilizadas**
 
-- **Frontend**: Angular, HTML5, CSS3
+- **Frontend**: Angular, HTML5, CSS3, Bootstrap
 - **Backend**: Spring Boot, Java
 - **Banco de Dados**: PostgreSQL
 - **Outras Tecnologias**: Docker, Docker Compose, Cielo API (Sandbox)
