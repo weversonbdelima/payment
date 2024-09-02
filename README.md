@@ -56,7 +56,32 @@ Siga os passos abaixo para configurar o ambiente e rodar a aplicação localment
 
 3. Inicie o banco de dados utilizando o Docker Compose:
     ```bash
-    sudo docker-compose up
+    docker-compose up
     ```
 
-Após seguir esses passos, o banco de dados estará configurado e pronto para uso. Em seguida, você poderá proceder com a instalação e execução do front-end e back-end da aplicação.
+4. Entre na pasta do backend:
+    ```bash
+    cd backend
+    ```
+
+5. Instale as dependências do backend:
+    ```bash
+    mvn install
+    ```
+
+6. Execute o backend utilizando o Maven:
+    ```bash
+    mvn spring-boot:run
+    ```
+
+7. Para rodar o frontend, abra um novo terminal, entre na pasta do frontend:
+    ```bash
+    cd frontend
+    ```
+
+8. Execute o seguinte comando para iniciar o servidor do frontend:
+    ```bash
+    npm start
+    ```
+
+Após seguir esses passos, tanto o backend quanto o frontend estarão em execução, e você poderá acessar a aplicação no navegador.
