@@ -14,23 +14,11 @@ import { Router } from '@angular/router';
   templateUrl: './order-register.component.html',
   styleUrls: ['./order-register.component.scss']
 })
-export class OrderRegisterComponent implements OnInit {
+export class OrderRegisterComponent {
   orderForm: FormGroup;
   isLoading: boolean = false;
 
 
-
-  order = {
-    description: 'Order Example',
-    amount: 100.0,
-    creditCard: {
-      cardNumber: '1234123412341234',
-      holder: 'Cardholder Name',
-      expirationDate: '12/2030',
-      securityCode: '123',
-      brand: 'Visa'
-    }
-  };
 
   constructor(private fb: FormBuilder, private orderService: OrderService, private router: Router) { // Injetar OrderService
     this.orderForm = this.fb.group({
@@ -45,24 +33,20 @@ export class OrderRegisterComponent implements OnInit {
       })
     });
   }
-  ngOnInit() {
 
-
-
-  }
 
 
   async onSubmit() {
 
 
     if (this.orderForm.valid) {
-      const order: Order = this.orderForm.value; 
+      const order: Order = this.orderForm.value;
 
       try {
         this.isLoading = true;
         const order = await this.orderService.registerOrder(this.order);
 
-       
+
 
         console.log(order);
         if (order.id != null) {
