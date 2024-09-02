@@ -4,7 +4,7 @@
 
 
 
-# **TransactX**
+# **Payment**
 
 ![Badge de status do projeto](https://img.shields.io/badge/status-em%20desenvolvimento-yellow) ![Badge de licença](https://img.shields.io/badge/license-MIT-blue)
 
@@ -21,6 +21,7 @@ O front-end foi criado para oferecer uma interface amigável e intuitiva, onde o
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Como Usar](#como-usar)
+- [Possíveis Evoluções Futuras](#possíveis-evoluções-futuras)
 - [Licença](#licença)
 - [Contato](#contato)
 
@@ -130,6 +131,34 @@ Após a instalação e execução do banco de dados, backend e frontend, siga os
    - Em caso de erros, verifique as mensagens exibidas na interface e os logs no terminal onde o backend está em execução para identificar e resolver os problemas.
 
 Após seguir esses passos, você poderá registrar e gerenciar vendas fictícias utilizando a aplicação.
+
+## **Possíveis Evoluções Futuras**
+
+Embora o projeto atual atenda aos requisitos básicos de registro de compras e processamento de pagamentos, existem diversas melhorias e funcionalidades que podem ser implementadas para ampliar a robustez e a usabilidade do sistema. Abaixo estão algumas sugestões:
+
+1. **Desenvolvimento Mobile**: 
+   - A criação de um aplicativo mobile permitiria que os usuários registrassem compras e realizassem pagamentos diretamente de seus dispositivos móveis. Isso tornaria a experiência do usuário mais conveniente e acessível, aumentando a interação com a aplicação.
+
+2. **Paginação para Otimizar o Carregamento**:
+   - Implementar a paginação nas listas de vendas e transações poderia melhorar significativamente o desempenho da aplicação, especialmente em casos onde há um grande volume de dados. Isso reduziria o tempo de carregamento das páginas e tornaria a interface mais responsiva.
+
+3. **Implementação de Balanceamento de Carga**:
+   - Para garantir que a aplicação possa escalar adequadamente em ambientes de alta demanda, a implementação de um sistema de balanceamento de carga seria benéfica. Isso garantiria que as requisições dos usuários fossem distribuídas de maneira eficiente entre múltiplas instâncias do servidor, melhorando a disponibilidade e a confiabilidade do sistema.
+
+4. **Integração com Outros Métodos de Pagamento**:
+   - Além da API de Sandbox da Cielo, considerar a integração com outros métodos de pagamento (como PayPal, PIX, entre outros) poderia ampliar as opções disponíveis para os usuários, aumentando a flexibilidade e a conveniência na hora de realizar transações.
+
+5. **Relatórios e Análises**:
+   - Adicionar uma funcionalidade de relatórios poderia fornecer aos usuários insights valiosos sobre suas transações, como tendências de compra, produtos mais vendidos e análises financeiras. Isso ajudaria na tomada de decisões informadas e estratégicas.
+
+6. **Autenticação e Autorização Avançadas**:
+   - Implementar um sistema de autenticação e autorização mais robusto, como OAuth ou JWT, poderia aumentar a segurança do sistema, garantindo que apenas usuários autenticados e autorizados possam acessar certas funcionalidades e informações sensíveis.
+
+7. **Controle por Perfil de Acesso**:
+   - A implementação de um controle por perfil de acesso permitiria que diferentes usuários tivessem permissões variadas dentro da aplicação. Isso garantiria que, por exemplo, apenas administradores pudessem acessar funcionalidades críticas, como a alteração de dados sensíveis ou a visualização de relatórios completos, enquanto usuários comuns teriam acesso restrito a funcionalidades básicas, como registro de vendas e consulta de status.
+
+Essas sugestões não apenas demonstram a viabilidade de evolução do projeto, mas também evidenciam um entendimento das melhores práticas em desenvolvimento de software e arquitetura de sistemas.
+
 
 ## **Licença**
 
