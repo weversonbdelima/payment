@@ -21,13 +21,17 @@ O front-end foi criado para oferecer uma interface amigável e intuitiva, onde o
 
 ## **Introdução**
 
-Uma introdução mais detalhada do projeto, explicando a motivação por trás da criação, o problema que ele resolve e quem pode se beneficiar dele.
+Este projeto foi concebido como uma solução completa para simular o processo de registro e pagamento de compras fictícias, utilizando a API de Sandbox da Cielo. Com a crescente demanda por sistemas de pagamento integrados, esta aplicação serve como um exemplo prático de como implementar um fluxo de pagamento end-to-end, desde a interface de usuário até a comunicação segura com uma API de terceiros. Ao integrar front-end e back-end de forma coesa, o projeto oferece uma plataforma para aprender e explorar as melhores práticas em desenvolvimento full-stack, especialmente no contexto de transações financeiras digitais.
 
 ## **Funcionalidades**
 
-- Funcionalidade 1: Descrição curta da funcionalidade.
-- Funcionalidade 2: Descrição curta da funcionalidade.
-- Funcionalidade 3: Descrição curta da funcionalidade.
+- **Registro de Vendas**: Permite ao usuário registrar dados de uma compra fictícia, incluindo descrição, valor e informações do cartão de crédito.
+- **Processamento de Pagamento**: Integração com a API de Sandbox da Cielo para processar o pagamento das vendas registradas, com captura automática.
+- **Exibição do Status da Transação**: Mostra o status da transação (sucesso ou falha) após o processamento do pagamento.
+- **Tratamento de Erros e Validações**: Implementação de validações nos formulários do front-end e tratamento adequado de erros para garantir a consistência e segurança dos dados inseridos.
+- **Listagem de Vendas**: Exibe uma lista completa de todas as vendas realizadas, permitindo ao usuário visualizar o histórico de transações.
+- **Cancelamento de Vendas (*Diferencial*)**: Funcionalidade adicional que permite o cancelamento de uma venda e do pagamento correspondente junto à Cielo.
+- **Criptografia de Dados Sensíveis (*Diferencial*)**: Implementação de criptografia para proteger os dados sensíveis, como informações do cartão de crédito, garantindo a segurança durante o processamento.
 
 ## **Tecnologias Utilizadas**
 
