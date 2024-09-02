@@ -30,19 +30,22 @@
                         <span class="badge text-white" [ngClass]="{
                             'text-bg-success': order.status === 'payment-approved', 
                             'text-bg-primary': order.status === 'payment-not-approved', 
-                            'text-bg-danger': order.status === 'cancel',
+                            'text-bg-danger': order.status === 'canceled',
                             'text-bg-warning': order.status === 'payment-pendent'
                         }">
                             {{
                             order.status === 'payment-approved' ? 'Aprovado' :
                             order.status === 'payment-not-approved' ? 'Rejeitado' :
-                            order.status === 'cancel' ? 'Cancelado' :
+                            order.status === 'canceled' ? 'Cancelado' :
                             'Pendente'
                             }} <!-- Lógica de status -->
                         </span>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" (click)="cancelOrder(order.id)">Cancelar</button>
+                        <button type="button" class="btn btn-danger" (click)="cancelOrder(order.id)"
+                            [disabled]="order.status === 'canceled'">
+                            Cancelar
+                        </button>
                         <!-- Chama a função de cancelamento -->
                     </td>
                 </tr>
