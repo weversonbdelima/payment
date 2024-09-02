@@ -1,3 +1,7 @@
+![Logo do Projeto](assets/imagens/transactx.png)
+
+
+
 # **TransactX**
 
 ![Badge de status do projeto](https://img.shields.io/badge/status-em%20desenvolvimento-yellow) ![Badge de licença](https://img.shields.io/badge/license-MIT-blue)
