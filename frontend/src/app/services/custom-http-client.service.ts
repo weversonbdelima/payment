@@ -32,10 +32,9 @@ export class CustomHttpClient {
         }
     }
 
-    async post(url: string, body?: any, params?: any) {
+    async post(url: string, body: any) {
         const config: AxiosRequestConfig = {
             headers: this.headers,
-            params: params,
         };
 
         try {
