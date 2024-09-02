@@ -39,7 +39,6 @@ public class CieloService {
         String url = "https://apisandbox.cieloecommerce.cielo.com.br/1/sales/OrderId/" + order.getId() + "/void?amount="
                 + order.getAmount();
 
-        logger.info("endpoint: {}", url);
         logger.info("Attempting to cancel order with ID: {}", order.getId());
 
         HttpHeaders headers = new HttpHeaders();
