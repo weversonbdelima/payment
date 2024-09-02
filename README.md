@@ -170,13 +170,12 @@ A Licença MIT é uma licença permissiva que permite que qualquer pessoa faça 
 
 Para mais informações, consulte o [site oficial da Open Source Initiative](https://opensource.org/licenses/MIT).
 
-## **Contato**
+## **Contato** 😊
 
 Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
 
-- **Email**: [weversonbdelima@gmail.com](mailto:weversonbdelima@gmail.com)
-- **GitHub**: [github.com.br/weversonbdelima](https://github.com/br/weversonbdelima)
-- **LinkedIn**: [linkedin.com/in/weversonblima](https://www.linkedin.com/in/weversonblima)
+- 📧 Email: [weversonbdelima@gmail.com](mailto:weversonbdelima@gmail.com)
+- 💻 GitHub: [github.com.br/weversonbdelima](https://github.com/weversonbdelima)
+- 👔 LinkedIn: [linkedin.com/in/weversonblima](https://www.linkedin.com/in/weversonblima)
 
-Estou sempre aberto a feedbacks e colaborações!
-
+Estou sempre aberto a feedbacks e colaborações! 🤝
