@@ -96,7 +96,7 @@ public class CieloService {
 
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
-        if (response.getStatusCode() == HttpStatus.CREATED) { // 201
+        if (response.getStatusCode() == HttpStatus.CREATED) {
             logger.info("Payment processed successfully for: {}", paymentRequest);
             return true;
         } else {

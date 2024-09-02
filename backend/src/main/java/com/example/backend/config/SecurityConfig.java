@@ -16,10 +16,9 @@ public class SecurityConfig {
 
         http.cors().and().csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/orders/**").authenticated() // Usando requestMatchers
-                        .anyRequest().permitAll() // Permitir todas as outras requisições
-                )
-                .httpBasic(); // Autenticação básica
+                        .requestMatchers("/api/orders/**").authenticated()
+                        .anyRequest().permitAll())
+                .httpBasic();
 
         return http.build();
     }
