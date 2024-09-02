@@ -1,5 +1,7 @@
-![Logo do Projeto](assets/images/transactx.png)
-
+<p float="left">
+  <img src="assets/images/payment_01.png" width="48%" />
+  <img src="assets/images/payment_02.png" width="48%" />
+</p>
 
 
 # **TransactX**
