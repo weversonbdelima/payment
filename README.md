@@ -124,7 +124,7 @@ Após a instalação e execução do banco de dados, backend e frontend, siga os
 3. **Listar Vendas Realizadas**:
    - Acesse a seção de listagem de vendas para visualizar todas as vendas registradas.
 
-4. **Cancelar uma Venda **:
+4. **Cancelar uma venda**:
    - Caso a venda registrada permita o cancelamento, você poderá clicar na opção correspondente para cancelar a venda e o pagamento junto à Cielo.
 
 5. **Monitorar Erros**:
